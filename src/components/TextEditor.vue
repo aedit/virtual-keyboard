@@ -3,7 +3,23 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    this.$refs['text-editor'].contentEditable = true
+  }
+}
 </script>
 
-<style></style>
+<style lang="scss">
+.text-editor {
+  margin: 1.5rem;
+  padding: 0.5rem;
+  border: 5px solid black;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  overflow-y: auto;
+  &:focus {
+    outline: none;
+  }
+}
+</style>
