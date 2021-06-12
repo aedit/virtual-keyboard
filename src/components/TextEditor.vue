@@ -1,14 +1,15 @@
 <template>
   <div ref="text-editor" class="text-editor">
-    <textarea readonly v-model="text" />
+    <textarea readonly :value="text" />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      text: ''
+  props: {
+    text: {
+      required: true,
+      type: String
     }
   }
 }

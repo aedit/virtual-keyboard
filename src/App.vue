@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <TextEditor></TextEditor>
-    <KeyBoard></KeyBoard>
+    <TextEditor :text="text"></TextEditor>
+    <KeyBoard @keyStroke="handleKeyStroke"></KeyBoard>
   </div>
 </template>
 
@@ -11,7 +11,17 @@ import KeyBoard from '@/components/KeyBoard'
 
 export default {
   name: 'App',
-  components: { TextEditor, KeyBoard }
+  data() {
+    return {
+      text: ''
+    }
+  },
+  components: { TextEditor, KeyBoard },
+  methods: {
+    handleKeyStroke(evt) {
+      console.log(evt)
+    }
+  }
 }
 </script>
 
