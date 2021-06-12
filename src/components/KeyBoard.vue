@@ -1,7 +1,7 @@
 <template>
   <div ref="key-board" class="key-board">
     <div class="row num-row">
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[0])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[0].lower }}
         </span>
@@ -9,7 +9,12 @@
           {{ symbolMap[0].upper }}
         </span>
       </kbd>
-      <kbd class="key" v-for="(item, index) in numMap" :key="index">
+      <kbd
+        @click="pushNumOrSymbol(item)"
+        class="key"
+        v-for="(item, index) in numMap"
+        :key="index"
+      >
         <span :class="{ key__inactive: isShiftPressed }">
           {{ item.lower }}
         </span>
@@ -17,7 +22,7 @@
           {{ item.upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[1])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[1].lower }}
         </span>
@@ -25,7 +30,7 @@
           {{ symbolMap[1].upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[2])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[2].lower }}
         </span>
@@ -59,7 +64,7 @@
           {{ item.upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[3])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[3].lower }}
         </span>
@@ -67,7 +72,7 @@
           {{ symbolMap[3].upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[4])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[4].lower }}
         </span>
@@ -75,7 +80,7 @@
           {{ symbolMap[4].upper }}
         </span>
       </kbd>
-      <kbd class="key row-last-key">
+      <kbd @click="pushNumOrSymbol(symbolMap[5])" class="key row-last-key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[5].lower }}
         </span>
@@ -115,7 +120,7 @@
           {{ item.upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[6])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[6].lower }}
         </span>
@@ -123,7 +128,7 @@
           {{ symbolMap[6].upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[7])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[7].lower }}
         </span>
@@ -163,7 +168,7 @@
           {{ item.upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[8])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[8].lower }}
         </span>
@@ -171,7 +176,7 @@
           {{ symbolMap[8].upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[9])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[9].lower }}
         </span>
@@ -179,7 +184,7 @@
           {{ symbolMap[9].upper }}
         </span>
       </kbd>
-      <kbd class="key">
+      <kbd @click="pushNumOrSymbol(symbolMap[10])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
           {{ symbolMap[10].lower }}
         </span>
@@ -305,6 +310,10 @@ export default {
       return alphaRow
         .split('')
         .map((el) => ({ lower: el.toLowerCase(), upper: el }))
+    },
+    pushNumOrSymbol(item) {
+      this.$emit('keyStroke', this.isShiftPressed ? item.upper : item.lower)
+      if (this.isShiftPressed) this.isShiftPressed = false
     }
   }
 }
