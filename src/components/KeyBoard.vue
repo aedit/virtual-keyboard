@@ -43,7 +43,14 @@
       </kbd>
     </div>
     <div class="row second-row">
-      <kbd class="key function-key caps-lock">CAPS LOCK</kbd>
+      <kbd
+        class="key function-key caps-lock"
+        @click="isCapsLock = !isCapsLock"
+        :class="{ active: isCapsLock }"
+      >
+        CAPS LOCK
+        <span class="caps-lock__light"></span>
+      </kbd>
       <kbd
         class="key"
         v-for="(item, index) in alphaMap(alphaSecond)"
@@ -186,7 +193,8 @@ export default {
           lower: '/',
           upper: '?'
         }
-      ]
+      ],
+      isCapsLock: false
     }
   },
   methods: {
@@ -265,6 +273,23 @@ export default {
         grid-column: span 3;
         &.caps-lock {
           grid-column-start: span 5;
+          position: relative;
+
+          .caps-lock__light {
+            height: 10px;
+            width: 10px;
+            background: #999;
+            border-radius: 50%;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+          }
+
+          &.active {
+            .caps-lock__light {
+              background: #00c500;
+            }
+          }
         }
         &.return {
           grid-column: span 7;
