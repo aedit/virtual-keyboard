@@ -19,7 +19,7 @@ export default {
   components: { TextEditor, KeyBoard },
   methods: {
     handleKeyStroke(evt) {
-      console.log(evt)
+      this.text += evt
     }
   }
 }
