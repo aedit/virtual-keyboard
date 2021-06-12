@@ -2,20 +2,36 @@
   <div ref="key-board" class="key-board">
     <div class="row num-row">
       <kbd class="key">
-        {{ symbolMap[0].lower }}
-        {{ symbolMap[0].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[0].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[0].upper }}
+        </span>
       </kbd>
       <kbd class="key" v-for="(item, index) in numMap" :key="index">
-        {{ item.lower }}
-        {{ item.upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ item.lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ item.upper }}
+        </span>
       </kbd>
       <kbd class="key">
-        {{ symbolMap[1].lower }}
-        {{ symbolMap[1].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[1].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[1].upper }}
+        </span>
       </kbd>
       <kbd class="key">
-        {{ symbolMap[2].lower }}
-        {{ symbolMap[2].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[2].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[2].upper }}
+        </span>
       </kbd>
       <kbd class="key function-key backspace">&larr;</kbd>
     </div>
@@ -30,16 +46,28 @@
         {{ item.upper }}
       </kbd>
       <kbd class="key">
-        {{ symbolMap[3].lower }}
-        {{ symbolMap[3].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[3].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[3].upper }}
+        </span>
       </kbd>
       <kbd class="key">
-        {{ symbolMap[4].lower }}
-        {{ symbolMap[4].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[4].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[4].upper }}
+        </span>
       </kbd>
       <kbd class="key row-last-key">
-        {{ symbolMap[5].lower }}
-        {{ symbolMap[5].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[5].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[5].upper }}
+        </span>
       </kbd>
     </div>
     <div class="row second-row">
@@ -60,12 +88,20 @@
         {{ item.upper }}
       </kbd>
       <kbd class="key">
-        {{ symbolMap[6].lower }}
-        {{ symbolMap[6].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[6].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[6].upper }}
+        </span>
       </kbd>
       <kbd class="key">
-        {{ symbolMap[7].lower }}
-        {{ symbolMap[7].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[7].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[7].upper }}
+        </span>
       </kbd>
       <kbd class="key function-key return">RETURN</kbd>
     </div>
@@ -86,16 +122,28 @@
         {{ item.upper }}
       </kbd>
       <kbd class="key">
-        {{ symbolMap[8].lower }}
-        {{ symbolMap[8].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[8].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[8].upper }}
+        </span>
       </kbd>
       <kbd class="key">
-        {{ symbolMap[9].lower }}
-        {{ symbolMap[9].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[9].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[9].upper }}
+        </span>
       </kbd>
       <kbd class="key">
-        {{ symbolMap[10].lower }}
-        {{ symbolMap[10].upper }}
+        <span :class="{ key__inactive: isShiftPressed }">
+          {{ symbolMap[10].lower }}
+        </span>
+        <span :class="{ key__inactive: !isShiftPressed }">
+          {{ symbolMap[10].upper }}
+        </span>
       </kbd>
       <kbd
         class="key function-key shift--right"
@@ -250,6 +298,7 @@ export default {
       display: inline-flex;
       justify-content: center;
       align-items: center;
+      position: relative;
 
       &:active {
         transform: translateY(2px);
@@ -262,6 +311,14 @@ export default {
 
       &.space {
         grid-column: 6 / span 5;
+      }
+
+      &__inactive {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 1rem;
+        color: #888;
       }
     }
 
@@ -286,7 +343,6 @@ export default {
         grid-column: span 3;
         &.caps-lock {
           grid-column-start: span 5;
-          position: relative;
 
           .caps-lock__light {
             height: 10px;
