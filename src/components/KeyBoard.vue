@@ -70,7 +70,13 @@
       <kbd class="key function-key return">RETURN</kbd>
     </div>
     <div class="row third-row">
-      <kbd class="key function-key shift--left">SHIFT &uarr;</kbd>
+      <kbd
+        class="key function-key shift--left"
+        @click="isShiftPressed = !isShiftPressed"
+        :class="{ active: isShiftPressed }"
+      >
+        SHIFT &uarr;
+      </kbd>
       <kbd
         class="key"
         v-for="(item, index) in alphaMap(alphaThird)"
@@ -91,7 +97,13 @@
         {{ symbolMap[10].lower }}
         {{ symbolMap[10].upper }}
       </kbd>
-      <kbd class="key function-key shift--right"> SHIFT &uarr;</kbd>
+      <kbd
+        class="key function-key shift--right"
+        @click="isShiftPressed = !isShiftPressed"
+        :class="{ active: isShiftPressed }"
+      >
+        SHIFT &uarr;</kbd
+      >
     </div>
     <div class="row last-row">
       <kbd class="key function-key space">SPACE</kbd>
@@ -194,7 +206,8 @@ export default {
           upper: '?'
         }
       ],
-      isCapsLock: false
+      isCapsLock: false,
+      isShiftPressed: false
     }
   },
   methods: {
@@ -303,10 +316,16 @@ export default {
         &.shift {
           &--left {
             grid-column-start: span 2;
+            &.active {
+              transform: translateY(2px);
+            }
           }
 
           &--right {
             grid-column-end: span 3;
+            &.active {
+              transform: translateY(2px);
+            }
           }
         }
       }
