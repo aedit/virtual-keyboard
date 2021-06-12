@@ -44,6 +44,7 @@
       <kbd class="key function-key tab">TAB &rarr;</kbd>
       <kbd
         class="key"
+        @click="pushAlpha(item)"
         v-for="(item, index) in alphaMap(alphaFirst)"
         :key="index"
       >
@@ -100,6 +101,7 @@
       </kbd>
       <kbd
         class="key"
+        @click="pushAlpha(item)"
         v-for="(item, index) in alphaMap(alphaSecond)"
         :key="index"
       >
@@ -148,6 +150,7 @@
       </kbd>
       <kbd
         class="key"
+        @click="pushAlpha(item)"
         v-for="(item, index) in alphaMap(alphaThird)"
         :key="index"
       >
@@ -313,6 +316,15 @@ export default {
     },
     pushNumOrSymbol(item) {
       this.$emit('keyStroke', this.isShiftPressed ? item.upper : item.lower)
+      if (this.isShiftPressed) this.isShiftPressed = false
+    },
+    pushAlpha(item) {
+      const val =
+        (this.isCapsLock && !this.isShiftPressed) ||
+        (!this.isCapsLock && this.isShiftPressed)
+          ? item.upper
+          : item.lower
+      this.$emit('keyStroke', val)
       if (this.isShiftPressed) this.isShiftPressed = false
     }
   }
