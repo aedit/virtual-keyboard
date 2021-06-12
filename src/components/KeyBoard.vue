@@ -20,7 +20,7 @@
       <kbd class="key function-key backspace">&larr;</kbd>
     </div>
     <div class="row first-row">
-      <kbd class="key function-key tab">TAB</kbd>
+      <kbd class="key function-key tab">TAB &rarr;</kbd>
       <kbd
         class="key"
         v-for="(item, index) in alphaMap(alphaFirst)"
@@ -63,7 +63,7 @@
       <kbd class="key function-key return">RETURN</kbd>
     </div>
     <div class="row third-row">
-      <kbd class="key function-key shift--left">&uarr;</kbd>
+      <kbd class="key function-key shift--left">SHIFT &uarr;</kbd>
       <kbd
         class="key"
         v-for="(item, index) in alphaMap(alphaThird)"
