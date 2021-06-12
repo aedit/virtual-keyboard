@@ -42,8 +42,22 @@
         v-for="(item, index) in alphaMap(alphaFirst)"
         :key="index"
       >
-        {{ item.lower }}
-        {{ item.upper }}
+        <span
+          :class="{
+            key__inactive:
+              (isCapsLock && !isShiftPressed) || (!isCapsLock && isShiftPressed)
+          }"
+        >
+          {{ item.lower }}
+        </span>
+        <span
+          :class="{
+            key__inactive:
+              (isCapsLock && isShiftPressed) || (!isCapsLock && !isShiftPressed)
+          }"
+        >
+          {{ item.upper }}
+        </span>
       </kbd>
       <kbd class="key">
         <span :class="{ key__inactive: isShiftPressed }">
@@ -84,8 +98,22 @@
         v-for="(item, index) in alphaMap(alphaSecond)"
         :key="index"
       >
-        {{ item.lower }}
-        {{ item.upper }}
+        <span
+          :class="{
+            key__inactive:
+              (isCapsLock && !isShiftPressed) || (!isCapsLock && isShiftPressed)
+          }"
+        >
+          {{ item.lower }}
+        </span>
+        <span
+          :class="{
+            key__inactive:
+              (isCapsLock && isShiftPressed) || (!isCapsLock && !isShiftPressed)
+          }"
+        >
+          {{ item.upper }}
+        </span>
       </kbd>
       <kbd class="key">
         <span :class="{ key__inactive: isShiftPressed }">
@@ -118,8 +146,22 @@
         v-for="(item, index) in alphaMap(alphaThird)"
         :key="index"
       >
-        {{ item.lower }}
-        {{ item.upper }}
+        <span
+          :class="{
+            key__inactive:
+              (isCapsLock && !isShiftPressed) || (!isCapsLock && isShiftPressed)
+          }"
+        >
+          {{ item.lower }}
+        </span>
+        <span
+          :class="{
+            key__inactive:
+              (isCapsLock && isShiftPressed) || (!isCapsLock && !isShiftPressed)
+          }"
+        >
+          {{ item.upper }}
+        </span>
       </kbd>
       <kbd class="key">
         <span :class="{ key__inactive: isShiftPressed }">
