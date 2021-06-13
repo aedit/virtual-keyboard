@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <TextEditor :text="text"></TextEditor>
-    <KeyBoard @keyStroke="handleKeyStroke"></KeyBoard>
+    <KeyBoard
+      @keyStroke="handleKeyStroke"
+      @backspace="handleBackspace"
+    ></KeyBoard>
   </div>
 </template>
 
@@ -20,6 +23,9 @@ export default {
   methods: {
     handleKeyStroke(evt) {
       this.text += evt
+    },
+    handleBackspace() {
+      this.text = this.text.slice(0, -1)
     }
   }
 }

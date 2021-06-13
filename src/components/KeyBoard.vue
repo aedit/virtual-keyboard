@@ -38,7 +38,9 @@
           {{ symbolMap[2].upper }}
         </span>
       </kbd>
-      <kbd class="key function-key backspace">&larr;</kbd>
+      <kbd class="key function-key backspace" @click="$emit('backspace')">
+        &larr;
+      </kbd>
     </div>
     <div class="row first-row">
       <kbd class="key function-key tab" @click="$emit('keyStroke', '\t')">
