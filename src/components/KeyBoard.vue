@@ -210,6 +210,12 @@
       >
     </div>
     <div class="row last-row">
+      <kbd
+        class="key function-key ctrl"
+        @click="isCtrlPressed = !isCtrlPressed"
+      >
+        CTRL
+      </kbd>
       <kbd class="key function-key space" @click="$emit('keyStroke', ' ')">
         SPACE
       </kbd>
@@ -313,7 +319,8 @@ export default {
         }
       ],
       isCapsLock: false,
-      isShiftPressed: false
+      isShiftPressed: false,
+      isCtrlPressed: false
     }
   },
   methods: {
@@ -378,6 +385,10 @@ export default {
       &.backspace {
         font-size: 2rem;
         grid-column-end: span 2;
+      }
+
+      &.ctrl {
+        grid-column-start: span 1;
       }
 
       &.space {
