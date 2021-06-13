@@ -43,31 +43,44 @@
       </kbd>
     </div>
     <div class="row first-row">
-      <kbd class="key function-key tab" @click="$emit('keyStroke', '\t')">
+      <kbd
+        class="key function-key tab"
+        @click="
+          $emit('keyStroke', '\t')
+          isCtrlPressed = false
+        "
+      >
         TAB &rarr;
       </kbd>
       <kbd
         class="key"
-        @click="pushAlpha(item, 'first')"
+        @click="isCtrlPressed ? clickCtrl(item) : pushAlpha(item, 'first')"
         v-for="(item, index) in alphaMap('first')"
         :key="index"
       >
-        <span
-          :class="{
-            key__inactive:
-              (isCapsLock && !isShiftPressed) || (!isCapsLock && isShiftPressed)
-          }"
-        >
-          {{ item.lower }}
+        <span class="key__ctrl" v-if="isCtrlPressed && ctrlText(item)">
+          {{ ctrlText(item) }}
         </span>
-        <span
-          :class="{
-            key__inactive:
-              (isCapsLock && isShiftPressed) || (!isCapsLock && !isShiftPressed)
-          }"
-        >
-          {{ item.upper }}
-        </span>
+        <template v-else>
+          <span
+            :class="{
+              key__inactive:
+                (isCapsLock && !isShiftPressed) ||
+                (!isCapsLock && isShiftPressed)
+            }"
+          >
+            {{ item.lower }}
+          </span>
+          <span
+            :class="{
+              key__inactive:
+                (isCapsLock && isShiftPressed) ||
+                (!isCapsLock && !isShiftPressed)
+            }"
+          >
+            {{ item.upper }}
+          </span>
+        </template>
       </kbd>
       <kbd @click="pushNumOrSymbol(symbolMap[3])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
@@ -105,26 +118,33 @@
       </kbd>
       <kbd
         class="key"
-        @click="pushAlpha(item, 'second')"
+        @click="isCtrlPressed ? clickCtrl(item) : pushAlpha(item, 'second')"
         v-for="(item, index) in alphaMap('second')"
         :key="index"
       >
-        <span
-          :class="{
-            key__inactive:
-              (isCapsLock && !isShiftPressed) || (!isCapsLock && isShiftPressed)
-          }"
-        >
-          {{ item.lower }}
+        <span class="key__ctrl" v-if="isCtrlPressed && ctrlText(item)">
+          {{ ctrlText(item) }}
         </span>
-        <span
-          :class="{
-            key__inactive:
-              (isCapsLock && isShiftPressed) || (!isCapsLock && !isShiftPressed)
-          }"
-        >
-          {{ item.upper }}
-        </span>
+        <template v-else>
+          <span
+            :class="{
+              key__inactive:
+                (isCapsLock && !isShiftPressed) ||
+                (!isCapsLock && isShiftPressed)
+            }"
+          >
+            {{ item.lower }}
+          </span>
+          <span
+            :class="{
+              key__inactive:
+                (isCapsLock && isShiftPressed) ||
+                (!isCapsLock && !isShiftPressed)
+            }"
+          >
+            {{ item.upper }}
+          </span>
+        </template>
       </kbd>
       <kbd @click="pushNumOrSymbol(symbolMap[6])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
@@ -142,7 +162,13 @@
           {{ symbolMap[7].upper }}
         </span>
       </kbd>
-      <kbd class="key function-key return" @click="$emit('keyStroke', '\n')">
+      <kbd
+        class="key function-key return"
+        @click="
+          $emit('keyStroke', '\n')
+          isCtrlPressed = false
+        "
+      >
         RETURN
       </kbd>
     </div>
@@ -156,26 +182,33 @@
       </kbd>
       <kbd
         class="key"
-        @click="pushAlpha(item, 'third')"
+        @click="isCtrlPressed ? clickCtrl(item) : pushAlpha(item, 'third')"
         v-for="(item, index) in alphaMap('third')"
         :key="index"
       >
-        <span
-          :class="{
-            key__inactive:
-              (isCapsLock && !isShiftPressed) || (!isCapsLock && isShiftPressed)
-          }"
-        >
-          {{ item.lower }}
+        <span class="key__ctrl" v-if="isCtrlPressed && ctrlText(item)">
+          {{ ctrlText(item) }}
         </span>
-        <span
-          :class="{
-            key__inactive:
-              (isCapsLock && isShiftPressed) || (!isCapsLock && !isShiftPressed)
-          }"
-        >
-          {{ item.upper }}
-        </span>
+        <template v-else>
+          <span
+            :class="{
+              key__inactive:
+                (isCapsLock && !isShiftPressed) ||
+                (!isCapsLock && isShiftPressed)
+            }"
+          >
+            {{ item.lower }}
+          </span>
+          <span
+            :class="{
+              key__inactive:
+                (isCapsLock && isShiftPressed) ||
+                (!isCapsLock && !isShiftPressed)
+            }"
+          >
+            {{ item.upper }}
+          </span>
+        </template>
       </kbd>
       <kbd @click="pushNumOrSymbol(symbolMap[8])" class="key">
         <span :class="{ key__inactive: isShiftPressed }">
@@ -217,7 +250,13 @@
       >
         CTRL
       </kbd>
-      <kbd class="key function-key space" @click="$emit('keyStroke', ' ')">
+      <kbd
+        class="key function-key space"
+        @click="
+          $emit('keyStroke', ' ')
+          isCtrlPressed = false
+        "
+      >
         SPACE
       </kbd>
       <kbd
@@ -343,6 +382,7 @@ export default {
     pushNumOrSymbol(item, isNum) {
       this.$emit('keyStroke', this.isShiftPressed ? item.upper : item.lower)
       if (this.isShiftPressed) this.isShiftPressed = false
+      if (this.isCtrlPressed) this.isCtrlPressed = false
       if (this.randomizeKeys && isNum) {
         this.numMap = this.numMap.sort(() => 0.5 - Math.random())
       }
@@ -360,6 +400,35 @@ export default {
           .sort(() => 0.5 - Math.random())
           .join('')
       if (this.isShiftPressed) this.isShiftPressed = false
+      if (this.isCtrlPressed) this.isCtrlPressed = false
+    },
+    ctrlText(item) {
+      switch (item.upper) {
+        case 'S':
+          return 'Save'
+        case 'Q':
+          return 'Quit'
+        case 'T':
+          return 'Shortcuts'
+        case 'I':
+          return 'Info'
+        case 'R':
+          return 'Reload'
+        case 'A':
+          return 'Select All'
+        case 'C':
+          return 'Copy'
+        case 'V':
+          return 'Paste'
+        case 'X':
+          return 'Cut'
+        case 'N':
+          return 'New'
+      }
+    },
+    clickCtrl(item) {
+      this.isCtrlPressed = false
+      this.$emit('ctrlClicked', item)
     }
   }
 }
