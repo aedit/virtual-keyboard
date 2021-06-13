@@ -41,7 +41,9 @@
       <kbd class="key function-key backspace">&larr;</kbd>
     </div>
     <div class="row first-row">
-      <kbd class="key function-key tab">TAB &rarr;</kbd>
+      <kbd class="key function-key tab" @click="$emit('keyStroke', '\t')">
+        TAB &rarr;
+      </kbd>
       <kbd
         class="key"
         @click="pushAlpha(item)"
@@ -138,7 +140,9 @@
           {{ symbolMap[7].upper }}
         </span>
       </kbd>
-      <kbd class="key function-key return">RETURN</kbd>
+      <kbd class="key function-key return" @click="$emit('keyStroke', '\n')">
+        RETURN
+      </kbd>
     </div>
     <div class="row third-row">
       <kbd
@@ -204,7 +208,9 @@
       >
     </div>
     <div class="row last-row">
-      <kbd class="key function-key space">SPACE</kbd>
+      <kbd class="key function-key space" @click="$emit('keyStroke', ' ')">
+        SPACE
+      </kbd>
     </div>
   </div>
 </template>
