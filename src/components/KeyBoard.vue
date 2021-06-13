@@ -211,13 +211,21 @@
     </div>
     <div class="row last-row">
       <kbd
-        class="key function-key ctrl"
+        class="key function-key ctrl--left"
         @click="isCtrlPressed = !isCtrlPressed"
+        :class="{ active: isCtrlPressed }"
       >
         CTRL
       </kbd>
       <kbd class="key function-key space" @click="$emit('keyStroke', ' ')">
         SPACE
+      </kbd>
+      <kbd
+        class="key function-key ctrl--right"
+        @click="isCtrlPressed = !isCtrlPressed"
+        :class="{ active: isCtrlPressed }"
+      >
+        CTRL
       </kbd>
     </div>
   </div>
@@ -323,7 +331,7 @@ export default {
       isCapsLock: false,
       isShiftPressed: false,
       isCtrlPressed: false,
-      randomizeKeys: true
+      randomizeKeys: false
     }
   },
   methods: {

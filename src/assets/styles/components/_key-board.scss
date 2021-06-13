@@ -39,7 +39,19 @@
       }
 
       &.ctrl {
-        grid-column-start: span 1;
+        &--left {
+          grid-column: 1;
+          &.active {
+            transform: translateY(2px);
+          }
+        }
+
+        &--right {
+          grid-column: 15;
+          &.active {
+            transform: translateY(2px);
+          }
+        }
       }
 
       &.space {
