@@ -272,6 +272,7 @@
 
 <script>
 export default {
+  props: ['randomizeKeys'],
   data() {
     return {
       alphaRow: {
@@ -369,8 +370,7 @@ export default {
       ],
       isCapsLock: false,
       isShiftPressed: false,
-      isCtrlPressed: false,
-      randomizeKeys: false
+      isCtrlPressed: false
     }
   },
   methods: {
@@ -407,13 +407,11 @@ export default {
         case 'S':
           return 'Save'
         case 'Q':
-          return 'Quit'
-        case 'T':
-          return 'Shortcuts'
+          return 'Clear All'
+        case 'U':
+          return 'Udit Sen'
         case 'I':
           return 'Info'
-        case 'R':
-          return 'Reload'
         case 'A':
           return 'Select All'
         case 'C':
@@ -422,8 +420,10 @@ export default {
           return 'Paste'
         case 'X':
           return 'Cut'
-        case 'N':
-          return 'New'
+        case 'D':
+          return 'Delete Save'
+        case 'R':
+          return 'Randomize'
       }
     },
     clickCtrl(item) {
