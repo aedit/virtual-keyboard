@@ -1,0 +1,17 @@
+.text-editor {
+  margin: 1.5rem;
+
+  textarea {
+    resize: none;
+    width: 100%;
+    height: 90%;
+    padding: 0.5rem;
+    border: 5px solid black;
+    border-radius: 10px;
+    font-size: 1.5rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

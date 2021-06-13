@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <TextEditor :text="text"></TextEditor>
+    <div class="text-editor">
+      <textarea ref="text-area" readonly :value="text" />
+    </div>
     <KeyBoard
       @keyStroke="handleKeyStroke"
       @backspace="handleBackspace"
@@ -9,7 +11,6 @@
 </template>
 
 <script>
-import TextEditor from '@/components/TextEditor'
 import KeyBoard from '@/components/KeyBoard'
 
 export default {
@@ -19,7 +20,7 @@ export default {
       text: ''
     }
   },
-  components: { TextEditor, KeyBoard },
+  components: { KeyBoard },
   methods: {
     handleKeyStroke(evt) {
       this.text += evt
