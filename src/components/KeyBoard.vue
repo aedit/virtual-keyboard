@@ -10,7 +10,7 @@
         </span>
       </kbd>
       <kbd
-        @click="pushNumOrSymbol(item)"
+        @click="pushNumOrSymbol(item, true)"
         class="key"
         v-for="(item, index) in numMap"
         :key="index"
@@ -48,8 +48,8 @@
       </kbd>
       <kbd
         class="key"
-        @click="pushAlpha(item)"
-        v-for="(item, index) in alphaMap(alphaFirst)"
+        @click="pushAlpha(item, 'first')"
+        v-for="(item, index) in alphaMap('first')"
         :key="index"
       >
         <span
@@ -105,8 +105,8 @@
       </kbd>
       <kbd
         class="key"
-        @click="pushAlpha(item)"
-        v-for="(item, index) in alphaMap(alphaSecond)"
+        @click="pushAlpha(item, 'second')"
+        v-for="(item, index) in alphaMap('second')"
         :key="index"
       >
         <span
@@ -156,8 +156,8 @@
       </kbd>
       <kbd
         class="key"
-        @click="pushAlpha(item)"
-        v-for="(item, index) in alphaMap(alphaThird)"
+        @click="pushAlpha(item, 'third')"
+        v-for="(item, index) in alphaMap('third')"
         :key="index"
       >
         <span
@@ -227,9 +227,11 @@
 export default {
   data() {
     return {
-      alphaFirst: 'QWERTYUIOP',
-      alphaSecond: 'ASDFGHJKL',
-      alphaThird: 'ZXCVBNM',
+      alphaRow: {
+        first: 'QWERTYUIOP',
+        second: 'ASDFGHJKL',
+        third: 'ZXCVBNM'
+      },
       numMap: [
         {
           lower: '1',
@@ -320,26 +322,35 @@ export default {
       ],
       isCapsLock: false,
       isShiftPressed: false,
-      isCtrlPressed: false
+      isCtrlPressed: false,
+      randomizeKeys: true
     }
   },
   methods: {
-    alphaMap(alphaRow = '') {
-      return alphaRow
+    alphaMap(type) {
+      return this.alphaRow[type]
         .split('')
         .map((el) => ({ lower: el.toLowerCase(), upper: el }))
     },
-    pushNumOrSymbol(item) {
+    pushNumOrSymbol(item, isNum) {
       this.$emit('keyStroke', this.isShiftPressed ? item.upper : item.lower)
       if (this.isShiftPressed) this.isShiftPressed = false
+      if (this.randomizeKeys && isNum) {
+        this.numMap = this.numMap.sort(() => 0.5 - Math.random())
+      }
     },
-    pushAlpha(item) {
+    pushAlpha(item, type) {
       const val =
         (this.isCapsLock && !this.isShiftPressed) ||
         (!this.isCapsLock && this.isShiftPressed)
           ? item.upper
           : item.lower
       this.$emit('keyStroke', val)
+      if (this.randomizeKeys)
+        this.alphaRow[type] = this.alphaRow[type]
+          .split('')
+          .sort(() => 0.5 - Math.random())
+          .join('')
       if (this.isShiftPressed) this.isShiftPressed = false
     }
   }
