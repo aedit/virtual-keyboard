@@ -40,12 +40,14 @@ export default {
         this.checkFirstStroke()
         this.text += evt
       }
+      this.updateScroll()
     },
     handleBackspace() {
       if (this.allowTyping) {
         this.checkFirstStroke()
         this.text = this.text.slice(0, -1)
       }
+      this.updateScroll()
     },
     initalizeStartText() {
       let index = 0
@@ -56,6 +58,9 @@ export default {
           this.allowTyping = true
         }
       }, 50)
+    },
+    updateScroll() {
+      this.$refs['text-area'].scrollTop = this.$refs['text-area'].scrollHeight
     }
   }
 }
